@@ -46,18 +46,20 @@ export function Gallery({ imagesData }: { imagesData: IMAGE_QUERYResult }) {
       <Suspense fallback={<div className="text-center">Loading images...</div>}>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {imagesData.map((image, i) => (
-            <div
-              key={i}
-              className="aspect-square relative overflow-hidden rounded-lg border-4 border-[#FF69B4] hover:scale-105 transition-transform duration-200"
-              onClick={() => handleImageClick(image)}
+            <Suspense key={i} fallback={<div className="text-center">Loading images...</div>}>
+              <div
+                key={i}
+                className="aspect-square relative overflow-hidden rounded-lg border-4 border-[#FF69B4] hover:scale-105 transition-transform duration-200"
+                onClick={() => handleImageClick(image)}
             >
               <Image
                 src={image.url || ""}
-                alt={`Austin Powers Moment ${i + 1}`}
-                className="object-cover"
-                fill
-              />
-            </div>
+                  alt={`Austin Powers Moment ${i + 1}`}
+                  className="object-cover"
+                  fill
+                />
+              </div>
+            </Suspense>
           ))}
         </div>
       </Suspense>
